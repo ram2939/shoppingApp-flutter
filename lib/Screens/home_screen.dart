@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './products_screen.dart';
+import '../widgets/drawer.dart';
 class HomeScreen extends StatelessWidget {
   final AppBar _appbar=AppBar(
     title: Text("Welcome to ShopAIO"),
@@ -8,6 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appbar,
+      drawer: AppDrawer(),
       body: Container(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             ),
             IconButton(icon: Icon(Icons.search),
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductsScreen())); 
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductsScreen("Televisions"))); 
             },)
           ],
         ),
