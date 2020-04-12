@@ -6,19 +6,22 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children:<Widget>[
-          Card(
-            elevation: 5,
-              child: GestureDetector(
-              child: Text("Home"),
-              onTap: (){
-
-              },),
-          ),
-            GestureDetector(
-            child: Text("Cart"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+            child: Text("Home"),
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart()) );
+
             },),
+          ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+              child: Text("Cart"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart()) );
+              },),
+            ),
       
         ]
         ),

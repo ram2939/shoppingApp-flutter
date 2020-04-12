@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
   final Function onPressed;
+  final Function onTap;
   final TextEditingController _textEditingController=new TextEditingController();
-  SearchBar({this.onPressed});
+  SearchBar({this.onPressed,this.onTap});
   String getSearch(){
     return _textEditingController.text;
   }
@@ -25,6 +26,7 @@ class SearchBar extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width*0.8,
               child: TextField(
+                onTap: onTap,
                 controller: _textEditingController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
