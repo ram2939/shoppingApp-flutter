@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app/models/product.dart';
 
 class ReviewRatingContainer extends StatelessWidget {
-  Product product;
-  int five=10;
-  int four=7;
+  final Product product;
+  final int five=10;
+  final int four=7;
   ReviewRatingContainer(this.product);
   @override
   Widget build(BuildContext context) {
-    Product item;
     return Container(
       child: Row(
         children: <Widget>[

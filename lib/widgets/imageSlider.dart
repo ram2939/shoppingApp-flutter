@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
 class ImageSlider extends StatelessWidget {
-  List<String> list;
+  final List<String> list;
   ImageSlider(this.list);
   @override
   Widget build(BuildContext context) {

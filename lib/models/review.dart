@@ -2,8 +2,8 @@ class Review {
   final String productID;
   final String heading;
   final String review;
-  final int ratings;
-  final List<String> images;
+  final String ratings;
+  final List<dynamic> images;
   final String date;
 
   Review(
@@ -16,4 +16,14 @@ class Review {
       this.date
     }
   );
+  static Review fromJson(Map<String,dynamic> json){
+      return Review(
+        date: json['date'],
+        heading: json['heading'],
+        // productID: json['productID'],
+        ratings: json['ratings'],
+        // review:json['review'],
+        images: json['images']
+      );
+  }
 }

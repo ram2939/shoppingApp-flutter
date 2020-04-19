@@ -1,19 +1,31 @@
+// import 'package:shopping_app/AppRepository.dart';
+import 'dart:convert';
+
+import 'package:provider/provider.dart';
+import 'package:shopping_app/AppRepository.dart';
 import 'package:shopping_app/models/review.dart';
 import 'package:shopping_app/widgets/productDesc.dart';
 import 'package:shopping_app/widgets/reviewItem.dart';
 import 'package:shopping_app/widgets/reviewsandRatings.dart';
-
 import '../widgets/imageSlider.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 class ProductDetails extends StatelessWidget {
   final Product product;
-  final Review review=Review(ratings: 4,heading:"Must buy",date: "12/04/2020",review: "It is an excellent product",images: ["https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70","https://rukminim1.flixcart.com/image/416/416/jt8yxe80/refrigerator-new/x/k/n/gl-b201aspy-5-lg-original-imafemyzvrczxtqf.jpeg?q=70"]);
+  // final Review review=Review(ratings: 4,heading:"Must buy",date: "12/04/2020",review: "It is an excellent product",images: ["https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70","https://rukminim1.flixcart.com/image/416/416/jt8yxe80/refrigerator-new/x/k/n/gl-b201aspy-5-lg-original-imafemyzvrczxtqf.jpeg?q=70"]);
   ProductDetails(this.product);
   List<String> array;
+  // Future<List<Review>> getReviews() async{
+  // }
+  
   @override
   Widget build(BuildContext context) {
+  Future<Review> getReview() async{
+              var response=await Provider.of<AppRepository>(context).fetchReviews("abc");
+              final parsed=jsonDecode(response.body) as List;
+              return Review.fromJson(parsed[0]);
+            }
     array=[product.image,"https://rukminim1.flixcart.com/image/416/416/jt8yxe80/refrigerator-new/x/k/n/gl-b201aspy-5-lg-original-imafemyzvrczxtqf.jpeg?q=70"];
     return Scaffold(
           body: ListView(
@@ -46,7 +58,13 @@ class ProductDetails extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ReviewRatingContainer(product),
           ),
-          ReviewItem(review),
+          FutureBuilder(
+            future:getReview(),
+            builder:(context,snapshot){ 
+              if(snapshot.hasData) return ReviewItem(snapshot.data);
+              else return Container();
+            },
+          )
         ],
         
       ),

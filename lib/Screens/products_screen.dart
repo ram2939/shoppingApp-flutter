@@ -2,19 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/widgets/productListItem.dart';
 import '../models/product.dart';
-import '../widgets/product_item.dart';
-class ProductsScreen extends StatefulWidget {
+import '../widgets/productGriditem.dart';
+
+class ProductsScreen extends StatelessWidget {
   final String searchText;
-  final List<Product> list;
-  ProductsScreen(this.searchText,this.list);
-  @override
-  _ProductsScreenState createState() => _ProductsScreenState();
-}
+  // final List<Product> list;
+  ProductsScreen(this.searchText);
+//   @override
+//   _ProductsScreenState createState() => _ProductsScreenState();
+// }
 
-
-class _ProductsScreenState extends State<ProductsScreen> {
-  List<Product> items;
+// class _ProductsScreenState extends State<ProductsScreen> {
+  // List<Product> items;
+  final AppRepository y = AppRepository();
 
   // List<Product> items=[
   //   Product(
@@ -34,23 +36,36 @@ class _ProductsScreenState extends State<ProductsScreen> {
   //     isFavorite: true
   //   ),
   // ];
-      @override
-      void initState(){
-        items=widget.list;
-      }
+  Future<List<Product>> search() async {
+    var response = await y.fetchProduct(searchText);
+    final parsed = (jsonDecode(response.body)) as List;
+    print(parsed);
+    List<Product> list = parsed.map((value) {
+      return Product.fromJSON(value['_source']);
+    }).toList();
+    // list.add(Product.fromJSON(parsed));
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          appBar: AppBar(
-            title: Text("Search Results for ${widget.searchText}"),
-          ),      
-          body: GridView.builder(
-        itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (context, index){
-          return ProductItem(items[index],true);
-        },
+      appBar: AppBar(
+        title: Text("Search Results for $searchText"),
       ),
+      body: FutureBuilder(
+          future: search(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) {
+                  return ProductListItem(snapshot.data[index]);
+                },
+              );
+            } else
+              return Container(child: Center(child: CircularProgressIndicator()),);
+          }),
     );
   }
 }

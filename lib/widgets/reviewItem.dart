@@ -28,7 +28,7 @@ class ReviewItem extends StatelessWidget {
             ],
           ),
           Text(review.date),
-          Center(child: Text(review.review),),
+          // Center(child: Text(review.review),),
           Container(
             // width: double.infinity,
             height: 100,

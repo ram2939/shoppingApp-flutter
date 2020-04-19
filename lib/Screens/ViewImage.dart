@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 class ViewImage extends StatelessWidget {
-  Image image;
-  String tag;
+  final Image image;
+  final String tag;
   ViewImage(this.image,this.tag);
   @override
   Widget build(BuildContext context) {

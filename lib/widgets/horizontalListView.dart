@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import '../models/product.dart';
-import './product_item.dart';
+import './productGriditem.dart';
 class HorizontalList extends StatelessWidget{
   final List<Product> listOfProducts;
   HorizontalList(this.listOfProducts);
@@ -18,7 +18,7 @@ class HorizontalList extends StatelessWidget{
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: MediaQuery.of(context).size.width*0.45,
-              child: ProductItem(listOfProducts[index],false),),
+              child: ProductGridItem(listOfProducts[index]),),
           );
         })
     );

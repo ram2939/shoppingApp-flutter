@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/Screens/products_screen.dart';
+// import 'package:shopping_app/Screens/products_screen.dart';
 import 'package:shopping_app/widgets/searchBar.dart';
 
 class SearchScreen extends StatelessWidget {
