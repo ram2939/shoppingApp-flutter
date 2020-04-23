@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shopping_app/Screens/productPage.dart';
+import 'package:shopping_app/models/cartItem.dart';
 import 'package:shopping_app/utils/navigation.dart';
 import '../models/product.dart';
 import '../Screens/ProductDetails.dart';
 class CartItem extends StatelessWidget {
-  Function callback;
-  final Product item;
-  CartItem(this.item,this.callback);
+  final Function removeCallback;
+  final Function changeQuantity;
+  final cartItem item;
+  final int index;
+  CartItem(this.item,this.removeCallback,this.changeQuantity,this.index);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,21 +18,21 @@ class CartItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            // alignment: AlignmentDirectional.bottomCenter,
                 onTap: (){
-                  Navigate.push(context, ProductDetails(item));
+                  Navigate.push(context, ProductPage(item.product));
                 },
-                leading: Image(
-
-                    // height: (MediaQuery.of(context).size.height-MediaQuery.of(context).padding.top)*0.5,
-                    image: NetworkImage(item.image)),
+                leading: Container(
+                  height: 200,
+                  child: Image(
+                      image: NetworkImage(item.product.image)),
+                ),
               title: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: Text(item.name),
+                      child: Text(item.product.name),
                     ),
                     // Padding(
                     //   padding: const EdgeInsets.all(2.0),
@@ -39,7 +43,7 @@ class CartItem extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text("₹ "),
-                          Text(item.price.toString(),
+                          Text(item.product.price.toString(),
                           style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 25
@@ -47,13 +51,15 @@ class CartItem extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Quantity(1)
+                    GestureDetector(
+                      onTap: null,
+                      child: Quantity(1,changeQuantity,index))
                   ],
                 ),
               ),
               trailing: IconButton(
                 onPressed: (){
-                    callback(item);
+                    removeCallback(item);
                 },
                 icon: Icon(Icons.delete),
               ),
@@ -67,7 +73,9 @@ class CartItem extends StatelessWidget {
 }
 class Quantity extends StatefulWidget {
   int quantity;
-  Quantity(this.quantity);
+  int index;
+  Function changeQuantity;
+  Quantity(this.quantity,this.changeQuantity,this.index);
   @override
   _QuantityState createState() => _QuantityState();
 }
@@ -81,7 +89,6 @@ class _QuantityState extends State<Quantity> {
 
   @override
   Widget build(BuildContext context) {
-    // BoxShadow boxShadow=BoxShadow(spreadRadius: 2);
     return Container(
       width: 100,
       height: 35,
@@ -89,21 +96,18 @@ class _QuantityState extends State<Quantity> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(
-            // padding: const EdgeInsets.only(left:8.0),
             child: Card(
               elevation: 1.5,
-              // decoration: BoxDecoration(
-              //   color: Colors.white,
-              //   border: Border.all()
-              // ),
               child: Center(
                 child: GestureDetector(
                   onTap: (){
                     if(quantity>1)
+                    {
+                      widget.changeQuantity(widget.index,false);
                   setState(() {
                   quantity--;  
                   });
-                  
+                    }
                 },
                   child: Icon(Icons.remove)),
                 //  onPressed: (){
@@ -131,6 +135,7 @@ class _QuantityState extends State<Quantity> {
               child: Center(
                 child: GestureDetector(
                   onTap: (){
+                  widget.changeQuantity(widget.index,true);
                   setState(() {
                   quantity++;  
                   });

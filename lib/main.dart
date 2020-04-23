@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/Screens/loginPage.dart';
 import './Screens/home_screen.dart';
 void main() => runApp(MyApp());
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: HomeScreen(),
+     home:HomeScreen()
+      // home: HomeScreen(),
     )
       );
   }

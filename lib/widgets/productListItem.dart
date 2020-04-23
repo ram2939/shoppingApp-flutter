@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shopping_app/Screens/productPage.dart';
 import 'package:shopping_app/utils/navigation.dart';
 import '../models/product.dart';
 import '../Screens/ProductDetails.dart';
@@ -15,7 +16,7 @@ ProductListItem(this.item);
           ListTile(
             // alignment: AlignmentDirectional.bottomCenter,
                 onTap: (){
-                  Navigate.push(context, ProductDetails(item));
+                  Navigate.push(context, ProductPage(item));
                 },
                 leading: Image(
 

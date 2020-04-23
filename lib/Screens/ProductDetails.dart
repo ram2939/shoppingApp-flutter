@@ -21,11 +21,11 @@ class ProductDetails extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-  Future<Review> getReview() async{
-              var response=await Provider.of<AppRepository>(context).fetchReviews("abc");
-              final parsed=jsonDecode(response.body) as List;
-              return Review.fromJson(parsed[0]);
-            }
+  // Future<Review> getReview() async{
+  //             var response=await Provider.of<AppRepository>(context).fetchReviews("abc");
+  //             final parsed=jsonDecode(response.body) as List;
+  //             return Review.fromJson(parsed[0]);
+  //           }
     array=[product.image,"https://rukminim1.flixcart.com/image/416/416/jt8yxe80/refrigerator-new/x/k/n/gl-b201aspy-5-lg-original-imafemyzvrczxtqf.jpeg?q=70"];
     return Scaffold(
           body: ListView(
@@ -58,13 +58,13 @@ class ProductDetails extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ReviewRatingContainer(product),
           ),
-          FutureBuilder(
-            future:getReview(),
-            builder:(context,snapshot){ 
-              if(snapshot.hasData) return ReviewItem(snapshot.data);
-              else return Container();
-            },
-          )
+          // FutureBuilder(
+          //   future:getReview(),
+          //   builder:(context,snapshot){ 
+          //     if(snapshot.hasData) return ReviewItem(snapshot.data);
+          //     else return Container();
+          //   },
+          // )
         ],
         
       ),

@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
               ],),
       );
     }
-    searchBar=SearchBar(onPressed: search,onTap: null);
+    searchBar=SearchBar(active: false,);
     return Scaffold(
       appBar: _appbar,
       drawer: AppDrawer(),

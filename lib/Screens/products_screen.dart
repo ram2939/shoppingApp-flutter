@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/Screens/searchScreen.dart';
+import 'package:shopping_app/utils/navigation.dart';
 import 'package:shopping_app/widgets/productListItem.dart';
+import 'package:shopping_app/widgets/searchBar.dart';
 import '../models/product.dart';
 import '../widgets/productGriditem.dart';
 
@@ -36,6 +39,7 @@ class ProductsScreen extends StatelessWidget {
   //     isFavorite: true
   //   ),
   // ];
+  SearchBar sb;
   Future<List<Product>> search() async {
     var response = await y.fetchProduct(searchText);
     final parsed = (jsonDecode(response.body)) as List;
@@ -49,23 +53,40 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    sb=SearchBar(
+            // onTap: (){
+            //       Navigate.push(context, SearchScreen(),plain: true);
+            //     },
+            // onPressed: (){
+            //   Navigate.push(context, ProductsScreen(sb.getSearch()),plain: true);
+            // },
+            active: false,
+          );
     return Scaffold(
       appBar: AppBar(
         title: Text("Search Results for $searchText"),
       ),
-      body: FutureBuilder(
-          future: search(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
-                  return ProductListItem(snapshot.data[index]);
-                },
-              );
-            } else
-              return Container(child: Center(child: CircularProgressIndicator()),);
-          }),
+      body: Column(
+        children: <Widget>[
+          sb,
+          Container(
+            height: MediaQuery.of(context).size.height*0.8,
+            child: FutureBuilder(
+                future: search(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return ProductListItem(snapshot.data[index]);
+                      },
+                    );
+                  } else
+                    return Container(child: Center(child: CircularProgressIndicator()),);
+                }),
+          ),
+        ],
+      ),
     );
   }
 }
