@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/Screens/home_screen.dart';
+import 'package:shopping_app/utils/navigation.dart';
 
 class LoginPage extends StatelessWidget {
   TextEditingController email=new TextEditingController();
@@ -27,7 +29,8 @@ class LoginPage extends StatelessWidget {
             obscureText: true,
           ),
           FlatButton(onPressed: () async{
-          print(await Provider.of<AppRepository>(context,listen: false).getLogin(email.text, password.text)); 
+          print(await Provider.of<AppRepository>(context,listen: false).getLogin(email.text, password.text));
+          Navigate.push(context, HomeScreen(),plain: true); 
           }, child: Text("Login"))
         ],
       ),

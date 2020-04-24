@@ -1,11 +1,11 @@
 // import 'package:shopping_app/AppRepository.dart';
-import 'dart:convert';
+// import 'dart:convert';
 
-import 'package:provider/provider.dart';
-import 'package:shopping_app/AppRepository.dart';
-import 'package:shopping_app/models/review.dart';
+// import 'package:provider/provider.dart';
+// import 'package:shopping_app/AppRepository.dart';
+// import 'package:shopping_app/models/review.dart';
 import 'package:shopping_app/widgets/productDesc.dart';
-import 'package:shopping_app/widgets/reviewItem.dart';
+// import 'package:shopping_app/widgets/reviewItem.dart';
 import 'package:shopping_app/widgets/reviewsandRatings.dart';
 import '../widgets/imageSlider.dart';
 // import 'package:carousel_slider/carousel_slider.dart';

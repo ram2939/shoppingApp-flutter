@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopping_app/AppRepository.dart';
-import 'package:shopping_app/Screens/searchScreen.dart';
-import 'package:shopping_app/utils/navigation.dart';
+// import 'package:shopping_app/Screens/searchScreen.dart';
+// import 'package:shopping_app/utils/navigation.dart';
 import 'package:shopping_app/widgets/productListItem.dart';
 import 'package:shopping_app/widgets/searchBar.dart';
 import '../models/product.dart';
-import '../widgets/productGriditem.dart';
+// import '../widgets/productGriditem.dart';
 
 class ProductsScreen extends StatelessWidget {
   final String searchText;

@@ -5,19 +5,22 @@ class cartItem {
   double price;
 
   cartItem(this.item,this.itemQuantity,this.price);
-  static cartItem fromJSON(Map<String,dynamic> json)
-  {
-    var i=Product.fromJSON(json);
-    var q=int.parse(json['quantity']);
-    return cartItem(i,q,i.price);
-  }
+  // static cartItem fromJSON(Map<String,dynamic> json)
+  // {
+  //   var i=Product.fromJSON(json);
+  //   var q=int.parse(json['quantity']);
+  //   return cartItem(i,q,i.price);
+  // }
   Product get product{
     return item;
   }
   int get quantity{
     return itemQuantity;
   }
-  void set quantity(int qty){
+  set quantity(int qty){
     itemQuantity=qty;
+  }
+  static cartItem fromJSON(Map<String,dynamic> json){
+    return cartItem(Product.fromJSON(json['product']),1,double.parse(json['price']));   
   }
 }

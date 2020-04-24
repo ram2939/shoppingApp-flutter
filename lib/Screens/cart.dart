@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/AppRepository.dart';
 import 'package:shopping_app/models/cartItem.dart';
 import '../models/product.dart';
 import '../widgets/cartItem.dart';
@@ -11,6 +13,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   double total=0;
   removeProduct(cartItem item){
+      Provider.of<AppRepository>(context,listen: false).cart.remove(item);
       setState(() {
       items.remove(item);
       total-=item.price*item.itemQuantity;  
@@ -39,24 +42,13 @@ class _CartState extends State<Cart> {
 
   @override
   void initState(){
-    for(int i=0;i<items.length;i++){
+    super.initState();
+    items=Provider.of<AppRepository>(context,listen: false).cart;
+        for(int i=0;i<items.length;i++){
       total+=items[i].price;
     }
   }
-  final List<cartItem> items=[
-    cartItem(Product(
-      name: "MI Tv",
-      image: "https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70",
-      description: "This is a Mi TV",
-      price: 5500,
-    ),1,5500),
-    cartItem(Product(
-      name: "LG TV",
-      image: "https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70",
-      description: "This is a LG TV",
-      price: 5500,
-    ),1,5600)    
-  ];
+  List<cartItem> items;
 
   @override
   Widget build(BuildContext context) {

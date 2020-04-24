@@ -3,7 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shopping_app/Screens/productPage.dart';
 import 'package:shopping_app/utils/navigation.dart';
 import '../models/product.dart';
-import '../Screens/ProductDetails.dart';
 class ProductListItem extends StatelessWidget {
   final Product item;
 ProductListItem(this.item);

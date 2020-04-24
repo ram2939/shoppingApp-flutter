@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shopping_app/Screens/productPage.dart';
 import 'package:shopping_app/models/cartItem.dart';
 import 'package:shopping_app/utils/navigation.dart';
-import '../models/product.dart';
-import '../Screens/ProductDetails.dart';
 class CartItem extends StatelessWidget {
   final Function removeCallback;
   final Function changeQuantity;
@@ -43,7 +40,7 @@ class CartItem extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text("₹ "),
-                          Text(item.product.price.toString(),
+                          Text(item.price.toString(),
                           style: TextStyle(
                             color: Theme.of(context).accentColor,
                             fontSize: 25

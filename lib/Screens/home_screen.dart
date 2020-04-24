@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/Screens/products_screen.dart';
+// import 'package:shopping_app/Screens/products_screen.dart';
 import '../widgets/drawer.dart';
 import '../widgets/horizontalListView.dart';
 import '../models/product.dart';
@@ -37,21 +37,7 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
     SearchBar searchBar;
-    search() async
-    {
-      // AppRepository y=AppRepository();
-      // var response=await y.fetchProduct("abc");
-      // final parsed=jsonDecode(response.body) as List;
-      // List<Product> list=parsed.map((value){
-      //   return Product.fromJSON(value);
-      // }).toList();
-      // print(list[0].name);
-      // print(list[1].name);
-      // // list.add(Product.fromJSON(parsed[0]));
-      // list.add(Product.fromJSON(parsed[1]));
-      // // y.getLogin();
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductsScreen(searchBar.getSearch())));
-    }
+    
     catergoryRow(String text){
       return Padding(
         padding: const EdgeInsets.only(left: 8.0, right: 8.0),
