@@ -4,18 +4,23 @@
 // import 'package:provider/provider.dart';
 // import 'package:shopping_app/AppRepository.dart';
 // import 'package:shopping_app/models/review.dart';
-import 'package:shopping_app/widgets/productDesc.dart';
-// import 'package:shopping_app/widgets/reviewItem.dart';
-import 'package:shopping_app/widgets/reviewsandRatings.dart';
-import '../widgets/imageSlider.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/widgets/productDesc.dart';
+import 'package:shopping_app/widgets/reviewItem.dart';
+import 'package:shopping_app/widgets/reviewsandRatings.dart';
+
 import '../models/product.dart';
+import '../widgets/imageSlider.dart';
+
+
 class ProductDetails extends StatelessWidget {
   final Product product;
   // final Review review=Review(ratings: 4,heading:"Must buy",date: "12/04/2020",review: "It is an excellent product",images: ["https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70","https://rukminim1.flixcart.com/image/416/416/jt8yxe80/refrigerator-new/x/k/n/gl-b201aspy-5-lg-original-imafemyzvrczxtqf.jpeg?q=70"]);
-  ProductDetails(this.product);
   List<String> array;
+  ProductDetails(this.product);
   // Future<List<Review>> getReviews() async{
   // }
   
@@ -59,12 +64,36 @@ class ProductDetails extends StatelessWidget {
             child: ReviewRatingContainer(product),
           ),
           // FutureBuilder(
-          //   future:getReview(),
+          //   future:Provider.of<AppRepository>(context,listen: false).fetchReviews(product.id),
           //   builder:(context,snapshot){ 
-          //     if(snapshot.hasData) return ReviewItem(snapshot.data);
+          //     if(snapshot.hasData){ 
+          //       return Container(
+          //         child:Column(
+          //           children: <Widget>[
+                      
+          //             snapshot.data.length>2
+          //             ? ReviewItem(snapshot.data[0]),Re
+          //             : Text("No reviews") 
+          //           ],
+          //         ),
+          //       );
+          //     }
           //     else return Container();
           //   },
-          // )
+          // ),
+          Row(
+            children: <Widget>[
+              FlatButton(onPressed: (){
+                Fluttertoast.showToast(msg: "Successfully Added to cart");
+                Provider.of<AppRepository>(context,listen: false).addToCart(product);
+              }, child: Text("Add to Cart")),
+              FlatButton(onPressed: (){
+                Fluttertoast.showToast(msg: "Successfully Added to Favorites");
+                Provider.of<AppRepository>(context,listen: false).addToFavorite(product);
+              }, child: Text("Add to Favorites")),
+            ],
+          )
+          // 
         ],
         
       ),

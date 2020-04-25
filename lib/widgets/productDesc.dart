@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 class ProductDescription extends StatelessWidget {
-  List<String> details=["1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line",];
+  final List<String> details=["1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line","1st line","2nd line","3rd line","4th line",];
   @override
   Widget build(BuildContext context) {
     return Container(

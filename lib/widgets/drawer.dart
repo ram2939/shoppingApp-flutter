@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/Screens/favorites.dart';
 import '../Screens/cart.dart';
 class AppDrawer extends StatelessWidget {
   @override
@@ -22,7 +23,14 @@ class AppDrawer extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart()) );
               },),
             ),
-      
+        Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+              child: Text("Favorites"),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Favorites()) );
+              },),
+            ),
         ]
         ),
       

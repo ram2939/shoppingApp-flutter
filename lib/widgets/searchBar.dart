@@ -5,10 +5,10 @@ import 'package:shopping_app/utils/navigation.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController _textEditingController=new TextEditingController();
-  bool active=false;
+  final bool active;
   SearchBar({
     // this.onPressed,this.onTap,
-    this.active});
+    this.active=false});
   String getSearch(){
     return _textEditingController.text;
   }

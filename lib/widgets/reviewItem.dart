@@ -12,23 +12,30 @@ class ReviewItem extends StatelessWidget {
         children: <Widget>[
           Row(
             // mainAxisAlignment: MainAxisAlignment.end,
+            // mainAxisAlignment: MainAxisAlignment.,
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
+                width: MediaQuery.of(context).size.width*0.08,
                 child: Text(review.ratings.toString()+"★",
                 style: TextStyle(
                   color: Colors.white
                 ),),
                 color: Colors.green,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(review.heading),
+              Container(
+                width: MediaQuery.of(context).size.width*0.92,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(review.heading),
+                  ),
+                ),
               )
             ],
           ),
           Text(review.date),
-          // Center(child: Text(review.review),),
+          Center(child: Text(review.review),),
           Container(
             // width: double.infinity,
             height: 100,
@@ -55,7 +62,8 @@ class ReviewItem extends StatelessWidget {
               ).toList()
               ),
             ),
-          )
+          ),
+          Divider(thickness: 1,)
         ],
       ),
       
