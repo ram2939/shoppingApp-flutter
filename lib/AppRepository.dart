@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:shopping_app/models/product.dart';
+import 'package:shopping_app/models/productSeller.dart';
 
 import 'models/cartItem.dart';
 import 'models/review.dart';
@@ -14,11 +15,13 @@ class AppRepository {
   List<Review> reviews;
   final url = 'http://192.168.31.242:3000';
 
-  addToCart(Product item) async {
+  addToCart(Product item,ProductSeller seller) async {
     await http.put("$url/user/addToCart", body: {
       'uid': loggedInUser.userID,
       'pid': item.id,
-      'price': item.price.toString()
+      'price': item.price.toString(),
+      'sid':seller.id,
+      'name':seller.name,
     });
     getCartItems(loggedInUser.userID);
   }
@@ -39,6 +42,14 @@ class AppRepository {
     print(response.body.runtimeType);
     print(response.body);
     return response;
+  }
+  getSellers(String pid) async{
+    var response=await http.post("$url/product/getSellers",body: { 'pid':pid});
+    print("Response status: ${response.statusCode}");
+    final jsonSellers=jsonDecode(response.body) as List;
+    return jsonSellers.map((f){
+      return ProductSeller.fromJSON(f);
+    }).toList();
   }
 
   fetchReviews(String id) async {
@@ -80,8 +91,8 @@ class AppRepository {
     if (response.statusCode == 200) {
       final jsonUser = jsonDecode(response.body);
       loggedInUser = User.fromJSON(jsonUser);
-      getCartItems(loggedInUser.userID);
-      getFavoriteItems(loggedInUser.userID);
+      // getCartItems(loggedInUser.userID);
+      // getFavoriteItems(loggedInUser.userID);
     }
     return response.statusCode;
   }

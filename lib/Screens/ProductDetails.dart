@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/Screens/availableSellers.dart';
+// import 'package:shopping_app/models/productSeller.dart';
 import 'package:shopping_app/widgets/productDesc.dart';
-import 'package:shopping_app/widgets/reviewItem.dart';
+// import 'package:shopping_app/widgets/reviewItem.dart';
 import 'package:shopping_app/widgets/reviewsandRatings.dart';
 
 import '../models/product.dart';
@@ -53,16 +55,30 @@ class ProductDetails extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: Text("Sold by: "+product.sellerName),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(product.description),
           ),
           Padding(padding: const EdgeInsets.all(8.0),
           child: Text("Details"),
           ),
           ProductDescription(),
+          ListTile(
+                      title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text("Seller"),
+              Text("Price")
+            ],),
+          ),
+          AvailableSellers(product.id),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ReviewRatingContainer(product),
           ),
+
           // FutureBuilder(
           //   future:Provider.of<AppRepository>(context,listen: false).fetchReviews(product.id),
           //   builder:(context,snapshot){ 
@@ -84,8 +100,9 @@ class ProductDetails extends StatelessWidget {
           Row(
             children: <Widget>[
               FlatButton(onPressed: (){
+                // ProductSeller(id: product.sellerID,price: product.price,
                 Fluttertoast.showToast(msg: "Successfully Added to cart");
-                Provider.of<AppRepository>(context,listen: false).addToCart(product);
+                // Provider.of<AppRepository>(context,listen: false).addToCart(product,);
               }, child: Text("Add to Cart")),
               FlatButton(onPressed: (){
                 Fluttertoast.showToast(msg: "Successfully Added to Favorites");

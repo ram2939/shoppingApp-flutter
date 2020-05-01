@@ -19,8 +19,7 @@ class HomeScreen extends StatelessWidget {
               "https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70",
           description: "This is a Mi TV",
           price: 25000,
-          ratings: 4.4,
-          isFavorite: false),
+          ratings: 4.4,),
       Product(
           id: "sdknvk",
           name: "LG TV",
@@ -28,8 +27,7 @@ class HomeScreen extends StatelessWidget {
               "https://rukminim1.flixcart.com/image/416/416/k0sgl8w0/television/r/q/g/mi-l43m4-4ain-original-imafkdzpsafcrzue.jpeg?q=70",
           description: "This is a LG TV",
           price: 44000,
-          ratings: 4.2,
-          isFavorite: true),
+          ratings: 4.2,),
       Product(
           id: "mbsdfjbsdv",
           name: "LG TV",
@@ -38,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           description: "This is a LG TV",
           price: 44000,
           ratings: 4.2,
-          isFavorite: true),
+          ),
     ];
     SearchBar searchBar;
 

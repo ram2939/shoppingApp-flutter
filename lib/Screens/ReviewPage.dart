@@ -17,12 +17,14 @@ ReviewPage(this.id);
           future: Provider.of<AppRepository>(context,listen: false).fetchReviews(id),
               builder:(context,snapshot){ 
                 if(snapshot.hasData){
-                return ListView.builder(
+                return snapshot.data.length>0
+                ? ListView.builder(
           itemCount: snapshot.data.length,
           itemBuilder: (context,i){
             return ReviewItem(snapshot.data[i]);
 
-          });
+          })
+          : Center(child: Text("No reviews yet......"));
           }
           else return(Center(child:CircularProgressIndicator()));
               },
