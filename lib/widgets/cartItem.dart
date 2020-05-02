@@ -16,6 +16,7 @@ class CartItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
+            contentPadding: EdgeInsets.all(0),
             onTap: () {
               Navigate.push(context, ProductPage(item.product));
             },
@@ -29,12 +30,12 @@ class CartItem extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: Text(item.product.name),
+                    child: Text(item.product.name,style: TextStyle(fontWeight: FontWeight.bold),),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(2.0),
-                  //   child: ratingBar(item.ratings),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(item.sellerName,style: TextStyle(fontSize: 12),),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Row(

@@ -5,6 +5,6 @@ class ProductSeller{
 
 ProductSeller({this.name,this.id,this.price});
 static ProductSeller fromJSON(Map<String,dynamic> json){
-  return ProductSeller(id: json['selelr'],name:json['name'],price: (json['price']));
+  return ProductSeller(id: json['seller'],name:json['name'],price: (json['price']));
 }
 }

@@ -62,11 +62,13 @@ class _CartState extends State<Cart> {
         elevation: 2,
         child: Container(
           height: 50,
-          color: Colors.deepPurpleAccent,
+          color: Theme.of(context).primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Checkout"),
+              Text("Checkout",style: TextStyle(
+                color: Colors.white
+              ),),
             ],
           ),
         ),
@@ -79,16 +81,18 @@ class _CartState extends State<Cart> {
           Container(
             height: MediaQuery.of(context).size.height * 0.05,
             width: double.infinity,
-            color: Colors.blueAccent,
+            color: Colors.black26,
             child: Center(child: Text('Total cart value: $total')),
           ),
           Container(
             height: MediaQuery.of(context).size.height * 0.75,
-            child: ListView.builder(
+            child: items.length>0
+            ? ListView.builder(
                 itemCount: items.length,
                 itemBuilder: (context, i) {
                   return CartItem(items[i], removeProduct, changeQuantity, i);
-                }),
+                })
+                : Center(child: Text("Cart is empty"))
           ),
         ],
       ),

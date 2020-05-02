@@ -2,9 +2,11 @@ import 'product.dart';
 class cartItem {
   final Product item;
   int itemQuantity;
-  double price;
+  final int price;
+  final String sellerID;
+  final String sellerName;
 
-  cartItem(this.item,this.itemQuantity,this.price);
+  cartItem({this.item,this.itemQuantity,this.price,this.sellerID,this.sellerName});
   // static cartItem fromJSON(Map<String,dynamic> json)
   // {
   //   var i=Product.fromJSON(json);
@@ -21,6 +23,6 @@ class cartItem {
     itemQuantity=qty;
   }
   static cartItem fromJSON(Map<String,dynamic> json){
-    return cartItem(Product.fromJSON(json['product']),1,double.parse(json['price']));   
+    return cartItem(item: Product.fromJSON(json['product']),itemQuantity:1,price: int.parse(json['price']),sellerID: json['seller'],sellerName: json['sellerName']);   
   }
 }

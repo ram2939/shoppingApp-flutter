@@ -15,17 +15,31 @@ class AppRepository {
   List<Review> reviews;
   final url = 'http://192.168.31.242:3000';
 
-  addToCart(Product item,ProductSeller seller) async {
+  addToCart(Product item) async {
     await http.put("$url/user/addToCart", body: {
       'uid': loggedInUser.userID,
       'pid': item.id,
       'price': item.price.toString(),
-      'sid':seller.id,
-      'name':seller.name,
+      'sid':item.sellerID,
+      'name':item.sellerName,
     });
-    getCartItems(loggedInUser.userID);
+    cartItem newItem=new cartItem(item: item,itemQuantity: 1,price: item.price,sellerID:item.sellerID,sellerName: item.sellerName);
+    cart.add(newItem);
+    // Future.delayed(Duration(seconds: 2)).then((_){
+    //   getCartItems(loggedInUser.userID);
+    // });
+    
   }
-
+  getSellerProducts(String id) async{
+    var response=await http.post("$url/seller/getProducts",body: {
+      'sid':id
+    });
+    final parsed=jsonDecode(response.body) as List;
+    List<Product> x=parsed.map((f){
+      return Product.fromJSON(f['product']);
+    }).toList();
+    return x;
+  }
   addToFavorite(Product item) async {
     await http.put("$url/user/addToFavorite", body: {
       'uid': loggedInUser.userID,
@@ -71,7 +85,7 @@ class AppRepository {
     cart = jsonCart.map((value) {
       return cartItem.fromJSON(value);
     }).toList();
-    print(cart[0].item.name);
+    // print(cart[0].item.name);
   }
 
   getFavoriteItems(String uid) async {
@@ -91,8 +105,8 @@ class AppRepository {
     if (response.statusCode == 200) {
       final jsonUser = jsonDecode(response.body);
       loggedInUser = User.fromJSON(jsonUser);
-      // getCartItems(loggedInUser.userID);
-      // getFavoriteItems(loggedInUser.userID);
+      getCartItems(loggedInUser.userID);
+      getFavoriteItems(loggedInUser.userID);
     }
     return response.statusCode;
   }

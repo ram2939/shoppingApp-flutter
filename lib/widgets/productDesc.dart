@@ -6,7 +6,7 @@ class ProductDescription extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(right:5),
       height: MediaQuery.of(context).size.height*0.2,
-      color: Colors.black12,
+      color: Colors.black38,
       child: Scrollbar(
               child: ListView(
           // crossAxisAlignment: CrossAxisAlignment.start,

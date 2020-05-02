@@ -62,7 +62,8 @@ FavoriteListItem(this.item,this.removeCallback);
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(2.0),
-                      child: Text(item.name),
+                      child: Text(item.name,
+                      overflow: TextOverflow.ellipsis,),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(2.0),

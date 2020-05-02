@@ -3,10 +3,10 @@ class Product{
   final String name;
   final String image;
   final String description;
-  final int price;
+  int price;
   final double ratings;
-  final String sellerID;
-  final String sellerName;
+  String sellerID;
+  String sellerName;
   Product(
     {
       this.id,
