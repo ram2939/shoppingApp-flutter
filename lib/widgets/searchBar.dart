@@ -30,7 +30,7 @@ class SearchBar extends StatelessWidget {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.search),
-              onPressed: onPressed,
+              onPressed:active? onPressed:(){},
               color: Theme.of(context).primaryColor,
             ),
             active

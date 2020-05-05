@@ -54,6 +54,7 @@ class AppRepository {
     var response = await http.post("$url/product", body: q);
     print('Response staus: ${response.statusCode}');
     print(response.body.runtimeType);
+    print("Products");
     print(response.body);
     return response;
   }
@@ -98,8 +99,7 @@ class AppRepository {
   }
 
   getLogin(String email, String password) async {
-    var response = await http
-        .post("$url/user/login", body: {'email': email, 'password': password});
+    var response = await http.post("$url/user/login", body: {'email': email, 'password': password});
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     if (response.statusCode == 200) {

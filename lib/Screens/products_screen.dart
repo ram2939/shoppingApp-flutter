@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/widgets/drawer.dart';
 import 'package:shopping_app/widgets/productListItem.dart';
 import 'package:shopping_app/widgets/searchBar.dart';
 
@@ -26,6 +27,7 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Search Results for $searchText"),
       ),
+      drawer: AppDrawer(),
       body: Column(
         children: <Widget>[
           SearchBar(),
@@ -57,8 +59,9 @@ class ProductsScreen extends StatelessWidget {
     final parsed = (jsonDecode(response.body)) as List;
     print(parsed);
     List<Product> list = parsed.map((value) {
-      value['_source']['_id'] = value['_id'];
-      return Product.fromJSON(value['_source']);
+      //value['_source']['_id'] = value['_id'];
+      // return Product.fromJSON(value['_source']);
+      return Product.fromJSON(value);
     }).toList();
     // list.add(Product.fromJSON(parsed));
     return list;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app/Screens/ProductDetails.dart';
 import 'package:shopping_app/Screens/ReviewPage.dart';
 import 'package:shopping_app/models/product.dart';
+import 'package:shopping_app/widgets/drawer.dart';
 // import 'package:shopping_app/models/review.dart';
 
 class ProductPage extends StatefulWidget {
@@ -29,9 +30,10 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  appBar: AppBar(
-      //    title: Text(widget.item.name),
-      //  ),
+      drawer: AppDrawer(),
+      appBar: AppBar(
+        title: Text(widget.item.name),
+      ),
       body: _children[_currentIndex], // new
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new

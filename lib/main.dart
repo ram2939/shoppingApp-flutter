@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/AppRepository.dart';
+import 'package:shopping_app/Screens/home_screen.dart';
 import 'package:shopping_app/Screens/loginPage.dart';
 
 // import './Screens/home_screen.dart';
@@ -16,9 +17,12 @@ class MyApp extends StatelessWidget {
           return _repository;
         },
         child: MaterialApp(
+          routes: {
+            '/home': (context) => HomeScreen(),
+          },
           title: 'ShopAIO',
           theme: ThemeData(
-            primarySwatch: Colors.purple,
+            primarySwatch: Colors.blue,
           ),
           //  home:HomeScreen()
           home: LoginPage(),

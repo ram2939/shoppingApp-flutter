@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/Screens/seller.dart';
 import 'package:shopping_app/models/product.dart';
@@ -60,6 +61,7 @@ class PSeller extends StatelessWidget {
         ],
       ),
       trailing: FlatButton(color: Colors.black12, onPressed: (){
+        Fluttertoast.showToast(msg: "Added to Cart");
         Product pr=Provider.of<Product>(context,listen: false);
         pr.sellerID=seller.id;
         pr.sellerName=seller.name;
