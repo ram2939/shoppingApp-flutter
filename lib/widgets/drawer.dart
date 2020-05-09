@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/AppRepository.dart';
@@ -17,19 +18,35 @@ class AppDrawer extends StatelessWidget {
             Column(
               children: <Widget>[
                 Container(
+                  // height: 100,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black12, width: 2),
                       shape: BoxShape.circle),
-                  child: CircleAvatar(
+                  child: 
+                  CircleAvatar(
                     radius: 80,
-                    backgroundImage: NetworkImage(
-                        "https://cdn.signmyemails.com/images/avatar.png"),
-                  ),
+                    backgroundImage: NetworkImage(Provider.of<AppRepository>(context).loggedInUser.profile),
+                    )
+        //             CachedNetworkImage(
+        //                 imageBuilder: (context,imageProvider){
+        //                   return Container(
+        //                     decoration: BoxDecoration(
+        //                       image: DecorationImage(image: imageProvider,fit: BoxFit.cover),
+        //               border: Border.all(color: Colors.black12, width: 2),
+        //               shape: BoxShape.circle
+        //               ),
+        //                   );
+        //                 },
+        //                 imageUrl: Provider.of<AppRepository>(context).loggedInUser.profile,
+        //                 placeholder: (context, url) => CircularProgressIndicator(),
+        // errorWidget: (context, url, error) => Icon(Icons.error),)
+        //           // ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                      Provider.of<AppRepository>(context).loggedInUser.name),
+                      Provider.of<AppRepository>(context).loggedInUser.name, style: TextStyle(fontWeight: FontWeight.bold),),
+                      
                 ),
               ],
             ),

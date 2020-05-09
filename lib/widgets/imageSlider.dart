@@ -1,6 +1,8 @@
 // import 'package:carousel_slider/carousel_slider.dart';
 // import 'dart:math';
 // import 'package:photo_view/photo_view.dart';
+import 'package:shopping_app/utils/sizeConfig.dart';
+
 import '../Screens/ViewImage.dart';
 import 'package:flutter/material.dart';
 // import 'package:simple_slider/simple_slider.dart';
@@ -11,11 +13,15 @@ class ImageSlider extends StatelessWidget {
   ImageSlider(this.list);
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return
-            SizedBox(
-  height: MediaQuery.of(context).size.height*0.3,
-  width: MediaQuery.of(context).size.width,
+  Container(
+  height: SizeConfig.safeBlockVertical*38,
+  width: SizeConfig.safeBlockHorizontal*80,
   child: Carousel(
+    dotSize: 7,
+    dotSpacing: 20,
+    // dotVerticalPadding: -5,
     dotBgColor: Colors.black12,
     autoplay:false,
     images: list.map((value){
@@ -24,7 +30,7 @@ class ImageSlider extends StatelessWidget {
         var tag=value;
       return 
       Padding(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.symmetric(horizontal:5),
      child:Hero(
             tag: tag,
             child: GestureDetector(

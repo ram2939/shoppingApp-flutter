@@ -14,6 +14,7 @@ class AppRepository {
   List<Product> favorites;
   List<Review> reviews;
   final url = 'http://192.168.31.242:3000';
+  // final url = 'http://13.233.138.244:3000';
 
   addToCart(Product item) async {
     await http.put("$url/user/addToCart", body: {
@@ -34,11 +35,15 @@ class AppRepository {
     var response=await http.post("$url/seller/getProducts",body: {
       'sid':id
     });
+    print(response.statusCode);
+    if(response.statusCode!=400){
     final parsed=jsonDecode(response.body) as List;
     List<Product> x=parsed.map((f){
       return Product.fromJSON(f['product']);
     }).toList();
     return x;
+    }
+    else return -1;
   }
   addToFavorite(Product item) async {
     await http.put("$url/user/addToFavorite", body: {
@@ -49,8 +54,9 @@ class AppRepository {
     getFavoriteItems(loggedInUser.userID);
   }
 
-  Future<dynamic> fetchProduct(String query) async {
-    var q = {'query': query};
+  Future<dynamic> fetchProduct(String query,int page) async {
+    var q = {'query': query,
+              'page':page.toString()};
     var response = await http.post("$url/product", body: q);
     print('Response staus: ${response.statusCode}');
     print(response.body.runtimeType);
@@ -72,10 +78,13 @@ class AppRepository {
     print('Response staus: ${response.statusCode}');
     print(response.body.runtimeType);
     print(response.body);
+    if(response.statusCode!=400){
     final jsonReview = jsonDecode(response.body) as List;
     return jsonReview.map((value) {
       return Review.fromJson(value);
     }).toList();
+    }
+    else return [];
   }
 
   getCartItems(String uid) async {
@@ -88,6 +97,37 @@ class AppRepository {
     }).toList();
     // print(cart[0].item.name);
   }
+  getFeatured(int page) async {
+    // print(uid);
+    var response = await http.post("$url/product/featured", body: {'page': page.toString()});
+    print(response.body);
+    final jsonCart = jsonDecode(response.body) as List;
+    return jsonCart.map((value) {
+      return Product.fromJSON(value['product']);
+    }).toList();
+    // print(cart[0].item.name);
+  }
+  getTop(int page) async {
+    // print(uid);
+    var response = await http.post("$url/product/top", body: {'page': page.toString()});
+    print(response.body);
+    final jsonCart = jsonDecode(response.body) as List;
+    return jsonCart.map((value) {
+      return Product.fromJSON(value['product']);
+    }).toList();
+    // print(cart[0].item.name);
+  }
+  getRecent() async {
+    // print(uid);
+    var response = await http.get("$url/product/recent");
+    print(response.body);
+    final jsonCart = jsonDecode(response.body) as List;
+    return jsonCart.map((value) {
+      return Product.fromJSON(value);
+    }).toList();
+    // print(cart[0].item.name);
+  }
+  
 
   getFavoriteItems(String uid) async {
     print(uid);

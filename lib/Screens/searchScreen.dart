@@ -16,10 +16,12 @@ class SearchScreen extends StatelessWidget {
   );
 
     return Scaffold(
-        body: ListView(
-          children: <Widget>[
-            searchBar
-          ],
+        body: SafeArea(
+                  child: ListView(
+            children: <Widget>[
+              searchBar
+            ],
+          ),
         ),      
     );
   }

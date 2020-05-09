@@ -6,6 +6,7 @@ import 'package:shopping_app/models/product.dart';
 import 'package:shopping_app/models/seller.dart';
 import 'package:shopping_app/models/productSeller.dart';
 import 'package:shopping_app/utils/navigation.dart';
+import 'package:shopping_app/utils/sizeConfig.dart';
 
 import '../AppRepository.dart';
 
@@ -14,27 +15,44 @@ class AvailableSellers extends StatelessWidget {
   AvailableSellers(this.id);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height*0.2,
-      child: FutureBuilder(
+    SizeConfig().init(context);
+    return FutureBuilder(
             future:Provider.of<AppRepository>(context,listen: false).getSellers(id),
             builder:(context,snapshot){ 
               if(snapshot.hasData){ 
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context,i){
-                    return PSeller(snapshot.data[i]);
-                  },
-                  
-                  );
+
+                return Column(
+                  children: <Widget>[
+                    ListTile(
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("All Sellers"),
+                    // Text("Price")
+                  ],
+                ),
+              ),
+                    Container(
+                      // color: Colors.red,
+                      height: SizeConfig.safeBlockVertical*8*snapshot.data.length,
+                      child: Column(
+                        // itemCount: snapshot.data.length,
+                        children: 
+                        // snapshot.data.forEach()
+                        snapshot.data.map<Widget>((values){
+                          return PSeller(values);
+                        }).toList(),
+                        
+                        ),
+                    ),
+                  ],
+                );
               }
               else return Container(
                 child: Text("Sorry! No sellers found"),
               );
             },
-          ),
-      
-    );
+          );
   }
 }
 class PSeller extends StatelessWidget {

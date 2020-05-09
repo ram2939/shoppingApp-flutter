@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopping_app/Screens/products_screen.dart';
 import 'package:shopping_app/Screens/searchScreen.dart';
 import 'package:shopping_app/utils/navigation.dart';
+import 'package:shopping_app/utils/sizeConfig.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController _textEditingController=new TextEditingController();
@@ -14,6 +15,7 @@ class SearchBar extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+  SizeConfig().init(context);
   Function onPressed=(){
                 Navigator.of(context).pop();
                 Navigate.push(context, ProductsScreen(_textEditingController.text),plain: true);
@@ -22,8 +24,9 @@ class SearchBar extends StatelessWidget {
     Navigate.push(context, SearchScreen(),plain: true);
   };
     return Container(
+      height: SizeConfig.safeBlockVertical*8,
       margin: EdgeInsets.all(8),
-      width: MediaQuery.of(context).size.width*0.99,
+      width: SizeConfig.safeBlockHorizontal*99,
       child: Card(
         elevation: 10,
         child: Row(
@@ -35,7 +38,7 @@ class SearchBar extends StatelessWidget {
             ),
             active
             ? Container(
-              width: MediaQuery.of(context).size.width*0.8,
+              width: SizeConfig.safeBlockHorizontal*80,
               child: TextField(
                 autofocus: true,
                 onSubmitted: (_){
@@ -49,8 +52,7 @@ class SearchBar extends StatelessWidget {
               )
               )
               : Container(
-                  width: MediaQuery.of(context).size.width*0.8,
-
+                  width: SizeConfig.safeBlockHorizontal*80,
                 child: GestureDetector(
                 onTap: onTap,
                 child: Text("Search",

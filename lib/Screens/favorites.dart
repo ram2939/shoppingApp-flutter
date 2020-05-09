@@ -30,10 +30,12 @@ class _FavoritesState extends State<Favorites> {
       appBar: AppBar(
         title: Text("Favorites"),
       ),
-      body: ListView.builder(itemCount: favorites.length,
+      body:favorites.length>0
+       ?ListView.builder(itemCount: favorites.length,
         itemBuilder: (context,i){
           return FavoriteListItem(favorites[i],removeItem);
-        }),
+        })
+        :Container(child: Center(child: Text("No items in Favorites"),),)
     );
   }
 }

@@ -42,9 +42,15 @@ class SellerPage extends StatelessWidget {
               future: Provider.of<AppRepository>(context).getSellerProducts(seller.id),
               builder: (context, snapshot){
                 if(snapshot.hasData){
+                  if(snapshot.data.length>0){  
                   return HorizontalList(snapshot.data);
                 }
-                else return Container();
+                else return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(child: Text("No products found")),
+                );
+                }
+                else return Container(child: Text("Finding"),);
               },
             )
         ],
